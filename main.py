@@ -1,4 +1,4 @@
-API_KEY='AIzaSyAj8Jg91bnOzLVefAMilnHQ8cM1khMAChM'
+API_KEY='API_KEY'
 
 import google.generativeai as genai
 import time
