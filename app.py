@@ -2,9 +2,8 @@ from flask import url_for, Flask, request, jsonify,render_template
 import google.generativeai as genai
 import time
 
-API_KEY='AIzaSyAj8Jg91bnOzLVefAMilnHQ8cM1khMAChM'
+API_KEY='AIzaSyD6V7UQ9_AgMhiH76t2o9td3bAPXFfrhb0'
 genai.configure(api_key=API_KEY)
-
 
 generation_config = {
   "temperature": 1,
@@ -35,13 +34,21 @@ safety_settings = [
     "threshold": "BLOCK_MEDIUM_AND_ABOVE"
   },
 ]
+H=[{'role': 'user','parts':['hi']},{'role':'model','parts':['hi']}]
 
 
 model = genai.GenerativeModel(model_name="gemini-1.0-pro",
                               generation_config=generation_config,
                               safety_settings=safety_settings)
 
-i=0
+
+Chat=model.start_chat(history=H)
+prompt=open('prompt.txt','r')
+inst=prompt.read()
+
+prompt.close()
+
+Chat.send_message(inst)
 app = Flask(__name__)  # create an app instance
 
 
@@ -56,29 +63,16 @@ def index():
 def chat():
     msg = request.form["msg"]
     input = msg
-    return get_chat_response(input)
+    global H
+    return get_chat_response(input,H)
 
 
-H=[{'role': 'user','parts':['hi']},{'role':'model','parts':['hi']}]
 
-def get_chat_response(question,history=H):
-
-
-    global i
-    
-    prompt=open('prompt.txt','r')
-    inst=prompt.read()
-    generation_config = {"temperature": 1,"top_p": 0.95,"top_k": 0,"max_output_tokens": 90000,}
-    prompt.close()
-    
-    
-    chat=model.start_chat(history=history)
-
-
-    if i==0: 
-        chat.send_message(inst)
+def get_chat_response(question,history=H,chat=None):
+    if chat is None:
+      global Chat
+      chat=globals()['Chat']  
     respone = chat.send_message(question)
-    i+=1
     H[-1]={'role':'user','parts':[question]}
     H[-1]={'role':'model','parts':[respone.text]}
     return respone.text
