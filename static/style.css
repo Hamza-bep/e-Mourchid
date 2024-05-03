@@ -6,14 +6,16 @@ body,html{
 	background: linear-gradient(to right, rgb(38, 51, 61), rgb(50, 55, 65), rgb(33, 33, 78));
 }
 
+
 .chat{
 	margin-top: auto;
 	margin-bottom: auto;
 }
-.card{
+.card
+{
 	height: 500px;
 	border-radius: 15px !important;
-	background-color: rgba(0,0,0,0.4) !important;
+	background-color: rgb(0,0,0,0.4) !important;
 }
 .contacts_body{
 	padding:  0.75rem 0 !important;
@@ -220,4 +222,31 @@ border-radius: 0 0 15px 15px !important;
 	.contacts_card{
 	margin-bottom: 15px !important;
 }
+}
+
+.background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../static/back.jpg');
+    background-size: cover;
+    background-position: center;
+    /* Adjust opacity or overlay colors as needed */
+    
+    /* Additional CSS properties to blend zelij with existing background */
+}
+
+.card-body {
+	background-color: rgba(255, 255, 255, 0.5);
+	background-image: url('../static/back.jpg');
+    background-size: cover;
+    background-position: center;
+}
+.card-header {
+	background-color: rgba(255, 255, 255, 0.);
+	background-image: url('../static/back.jpg');
+	background-size: cover;
+	background-position: center;
 }
