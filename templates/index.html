@@ -13,7 +13,8 @@
 	</head>
 	
 	
-	<body>
+	<body >
+		<div class="background-container">
 		<div class="container-fluid h-100">
 			<div class="row justify-content-center h-100">		
 				<div class="col-md-8 col-xl-6 chat">
@@ -25,14 +26,42 @@
 									<span class="online_icon"></span>
 								</div>
 								<div class="user_info">
-									<span>ChatBot</span>
-									<p>Ask me anything!</p>
+									<span>E-Morchid</span>
+									<p>Discover the beauty of Morocco</p>
 								</div>
 							</div>
 						</div>
 						<div id="messageFormeight" class="card-body msg_card_body">
 							
-							
+	{% for message in history %}
+        {% if message.role == 'user' %}
+            <div class="d-flex justify-content-end mb-4">
+                <div class="msg_cotainer_send">
+                    {% for part in message.parts %}
+                        {{ part }}
+                    {% endfor %}
+                    <span class="msg_time_send">{{ current_time }}</span>
+                </div>
+                <div class="img_cont_msg">
+                    <img src="{{ usr_img }}" class="rounded-circle user_img_msg" height="20px" style="margin-right: 10px; margin-top:12px">
+                </div>
+            </div>
+			
+
+        {% elif message.role == 'model' %}
+            <div class="d-flex justify-content-start mb-4">
+                <div class="img_cont_msg">
+                    <img src="{{ bot_img }}" class="rounded-circle user_img_msg">
+                </div>
+                <div class="msg_cotainer">
+                    {% for part in message.parts %}
+                        {{ part }}
+                    {% endfor %}
+                    <span class="msg_time">{{ current_time }}</span>
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
 						</div>
 						<div class="card-footer">
 							<form id="messageArea" class="input-group">
@@ -44,9 +73,10 @@
 						</div>
 					</div>
 				</div>
+				<div>HI</div>
 			</div>
 		</div>
-		
+		</div>
 		<script>
 			$(document).ready(function() {
 				$("#messageArea").on("submit", function(event) {
