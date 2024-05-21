@@ -4,7 +4,7 @@ import json
 import os
 
 
-API_KEY='AIzaSyD6V7UQ9_AgMhiH76t2o9td3bAPXFfrhb0'
+API_KEY='' #get your API KEY FROM https://aistudio.google.com/ and past it here 
 genai.configure(api_key=API_KEY)
 
 generation_config = {
