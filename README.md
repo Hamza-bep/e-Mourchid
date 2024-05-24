@@ -20,4 +20,10 @@ Open a terminal in the root directory of your local Chatbot UI repository and ru
 ```bash
 pip install -r requirements.txt
 ```
+to run the website localy go to the root directory of the repo and run this command:
+
+```bash
+python app.py
+```
+
 then play with the code as long as you want
